@@ -2,51 +2,50 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        <div style="margin-bottom: 1.5rem;">
+            <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-900); margin-bottom: 0.5rem;">Create Account</h1>
+            <p style="font-size: 0.875rem; color: var(--color-gray-500);">Join SecureVault to start protecting your sensitive data.</p>
+        </div>
+
         <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="form-group">
+            <label for="name" class="form-label">{{ __('Full Name') }}</label>
+            <input id="name" class="form-input" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" style="margin-top: 0.5rem; color: var(--color-danger-500); font-size: 0.75rem;" />
         </div>
 
         <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="form-group" style="margin-top: 1rem;">
+            <label for="email" class="form-label">{{ __('Email Address') }}</label>
+            <input id="email" class="form-input" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" style="margin-top: 0.5rem; color: var(--color-danger-500); font-size: 0.75rem;" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="form-group" style="margin-top: 1rem;">
+            <label for="password" class="form-label">{{ __('Password') }}</label>
+            <input id="password" class="form-input" type="password" name="password" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" style="margin-top: 0.5rem; color: var(--color-danger-500); font-size: 0.75rem;" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div class="form-group" style="margin-top: 1rem;">
+            <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+            <input id="password_confirmation" class="form-input" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password_confirmation')" style="margin-top: 0.5rem; color: var(--color-danger-500); font-size: 0.75rem;" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <div style="margin-top: 2rem;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 1rem;">
+                {{ __('Create Secure Account') }}
+            </button>
+        </div>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <p style="font-size: 0.875rem; color: var(--color-gray-600);">
+                {{ __('Already registered?') }}
+                <a href="{{ route('login') }}" style="font-weight: 700; color: var(--color-primary-600);">{{ __('Sign In') }}</a>
+            </p>
         </div>
     </form>
 </x-guest-layout>
