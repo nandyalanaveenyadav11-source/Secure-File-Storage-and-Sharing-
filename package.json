@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "build": "echo 'No build step required for static assets'"
     },
     "devDependencies": {
         "alpinejs": "^3.4.2",
