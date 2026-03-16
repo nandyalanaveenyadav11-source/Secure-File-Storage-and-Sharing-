@@ -7,57 +7,56 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased selection:bg-indigo-500 selection:text-white">
+<body>
     <!-- Navigation -->
-    <nav class="container mx-auto px-6 py-6 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+    <nav class="nav-header">
+        <div class="container nav-container">
+            <div class="nav-logo">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <span>SecureVault</span>
             </div>
-            <span class="text-xl font-bold tracking-tight text-gray-900">SecureVault</span>
-        </div>
-        <div class="flex items-center gap-4">
-            @auth
-                <a href="{{ url('/dashboard') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition">Log in</a>
-                <a href="{{ route('register') }}" class="text-sm font-medium bg-indigo-600 text-white px-5 py-2.5 rounded-full hover:bg-indigo-700 transition shadow-sm">Register</a>
-            @endauth
+            <div class="nav-links">
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-secondary">Log in</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
+                @endauth
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <main class="container mx-auto px-6 pt-20 pb-24 text-center max-w-4xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium mb-8 border border-indigo-100">
-            <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+    <main class="hero-section">
+        <div class="hero-pill">
+            <span class="pulse-dot"></span>
             Military-Grade Protection
         </div>
         
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-8 leading-tight">
-            Secure your files with <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">unbreakable encryption</span>.
+        <h1 class="hero-title">
+            Secure your files with <br><span class="text-gradient">unbreakable encryption</span>.
         </h1>
         
-        <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p class="hero-subtitle">
             Protect your sensitive data with AES-256 encryption vaulted behind RSA-2048 keys. Designed for seamless, ultra-fast, and secure file storage and sharing.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div class="hero-actions">
             @auth
-                <a href="{{ url('/dashboard') }}" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-semibold rounded-full hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
+                <a href="{{ url('/dashboard') }}" class="btn hero-btn hero-btn-primary">
                     Access Dashboard
                 </a>
             @else
-                <a href="{{ route('register') }}" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-semibold rounded-full hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
+                <a href="{{ route('register') }}" class="btn hero-btn hero-btn-primary">
                     Start for Free
                 </a>
-                <a href="#features" class="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 font-semibold rounded-full hover:bg-gray-50 border border-gray-200 transition shadow-sm">
+                <a href="#features" class="btn hero-btn hero-btn-secondary">
                     View Features
                 </a>
             @endauth
@@ -65,39 +64,39 @@
     </main>
 
     <!-- Features -->
-    <section id="features" class="bg-white border-t border-gray-100 py-24">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="grid md:grid-cols-3 gap-12">
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="features-grid">
                 <!-- Feature 1 -->
                 <div>
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <div class="feature-icon-wrapper indigo">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Hybrid Core</h3>
-                    <p class="text-gray-600 leading-relaxed">We encrypt your data with AES-256 and wrap the security key with your personal RSA certificate.</p>
+                    <h3 class="feature-title">Hybrid Core</h3>
+                    <p class="feature-desc">We encrypt your data with AES-256 and wrap the security key with your personal RSA certificate.</p>
                 </div>
                 <!-- Feature 2 -->
                 <div>
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                    <div class="feature-icon-wrapper blue">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Sharing</h3>
-                    <p class="text-gray-600 leading-relaxed">Instantly and securely share your encrypted files with other users on the platform with a single click.</p>
+                    <h3 class="feature-title">Secure Sharing</h3>
+                    <p class="feature-desc">Instantly and securely share your encrypted files with other users on the platform with a single click.</p>
                 </div>
                 <!-- Feature 3 -->
                 <div>
-                    <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <div class="feature-icon-wrapper purple">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Security Visualizer</h3>
-                    <p class="text-gray-600 leading-relaxed">The integrated Encryption Inspector lets you witness the raw power of the encryption protecting your files.</p>
+                    <h3 class="feature-title">Security Visualizer</h3>
+                    <p class="feature-desc">The integrated Encryption Inspector lets you witness the raw power of the encryption protecting your files.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 border-t border-gray-100 bg-gray-50 text-center text-sm text-gray-500">
+    <footer class="app-footer">
         <p>&copy; {{ date('Y') }} SecureVault. Designed for Excellence.</p>
     </footer>
 </body>

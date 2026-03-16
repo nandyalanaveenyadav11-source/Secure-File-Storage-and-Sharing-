@@ -1,11 +1,20 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DoqFcJPX.css",
+    "file": "assets/app-CAA7FtSb.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
     "names": [
       "app.css"
+    ]
+  },
+  "resources/css/custom.css": {
+    "file": "assets/custom-D8T-ijLI.css",
+    "src": "resources/css/custom.css",
+    "isEntry": true,
+    "name": "custom",
+    "names": [
+      "custom.css"
     ]
   },
   "resources/js/app.js": {

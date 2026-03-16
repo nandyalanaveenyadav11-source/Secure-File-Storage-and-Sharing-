@@ -1,113 +1,105 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center gap-2">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                        <x-application-logo class="block h-8 w-auto text-indigo-600" />
-                        <span class="text-xl font-extrabold tracking-tighter text-gray-900 dark:text-white">SecureVault</span>
-                    </a>
+<nav x-data="{ open: false }" class="nav-header">
+    <div class="container nav-container">
+        <div class="nav-logo">
+            <a href="{{ route('dashboard') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
                 </div>
+                <span>SecureVault</span>
+            </a>
+        </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Overview') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('files.index')" :active="request()->routeIs('files.*')">
-                        {{ __('My Vault') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('shared-files.index')" :active="request()->routeIs('shared-files.*')">
-                        {{ __('Shared With Me') }}
-                    </x-nav-link>
-                </div>
-            </div>
-
+        <!-- Desktop Links -->
+        <div class="nav-links" style="display: none; @media (min-width: 640px) { display: flex; align-items: center; }">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                {{ __('Overview') }}
+            </a>
+            <a href="{{ route('files.index') }}" class="nav-link {{ request()->routeIs('files.*') ? 'active' : '' }}">
+                {{ __('My Vault') }}
+            </a>
+            <a href="{{ route('shared-files.index') }}" class="nav-link {{ request()->routeIs('shared-files.*') ? 'active' : '' }}">
+                {{ __('Shared With Me') }}
+            </a>
+            
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <div style="position: relative; margin-left: 1.5rem;" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
+                <button @click="dropdownOpen = !dropdownOpen" style="display: flex; items-center: center; gap: 0.25rem; background: none; border: none; font-size: 0.875rem; font-weight: 500; color: var(--color-gray-600); cursor: pointer;">
+                    {{ Auth::user()->name }}
+                    <svg style="width: 1rem; height: 1rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
+
+                <div x-show="dropdownOpen" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 0.5rem; width: 12rem; background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--color-gray-100); z-index: 50;"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 scale-95"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-95">
+                    
+                    <a href="{{ route('profile.edit') }}" style="display: block; padding: 0.5rem 1rem; font-size: 0.875rem; color: var(--color-gray-700); text-decoration: none;">
+                        {{ __('Profile') }}
+                    </a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" style="display: block; padding: 0.5rem 1rem; font-size: 0.875rem; color: var(--color-gray-700); text-decoration: none;">
+                            {{ __('Log Out') }}
+                        </a>
+                    </form>
+                </div>
             </div>
+        </div>
+
+        <!-- Hamburger (Mobile) -->
+        <div style="display: flex; align-items: center; @media (min-width: 640px) { display: none; }">
+            <button @click="open = !open" style="background: none; border: none; padding: 0.5rem; color: var(--color-gray-500); cursor: pointer;">
+                <svg style="width: 1.5rem; height: 1.5rem;" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path :class="{'hidden': open, 'inline-flex': ! open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    <path :class="{'hidden': ! open, 'inline-flex': open }" style="display: none;" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('files.index')" :active="request()->routeIs('files.*')">
+    <!-- Mobile Menu -->
+    <div :class="{'block': open, 'hidden': ! open}" style="display: none; border-top: 1px solid var(--color-gray-200); background: var(--color-white);">
+        <div style="padding: 0.5rem 0;">
+            <a href="{{ route('dashboard') }}" style="display: block; padding: 0.5rem 1rem; font-size: 1rem; font-weight: 500; color: {{ request()->routeIs('dashboard') ? 'var(--color-primary-600)' : 'var(--color-gray-600)' }}; background: {{ request()->routeIs('dashboard') ? 'var(--color-primary-50)' : 'transparent' }}; border-left: 4px solid {{ request()->routeIs('dashboard') ? 'var(--color-primary-600)' : 'transparent' }};">
+                {{ __('Overview') }}
+            </a>
+            <a href="{{ route('files.index') }}" style="display: block; padding: 0.5rem 1rem; font-size: 1rem; font-weight: 500; color: {{ request()->routeIs('files.*') ? 'var(--color-primary-600)' : 'var(--color-gray-600)' }}; background: {{ request()->routeIs('files.*') ? 'var(--color-primary-50)' : 'transparent' }}; border-left: 4px solid {{ request()->routeIs('files.*') ? 'var(--color-primary-600)' : 'transparent' }};">
                 {{ __('My Vault') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('shared-files.index')" :active="request()->routeIs('shared-files.*')">
+            </a>
+            <a href="{{ route('shared-files.index') }}" style="display: block; padding: 0.5rem 1rem; font-size: 1rem; font-weight: 500; color: {{ request()->routeIs('shared-files.*') ? 'var(--color-primary-600)' : 'var(--color-gray-600)' }}; background: {{ request()->routeIs('shared-files.*') ? 'var(--color-primary-50)' : 'transparent' }}; border-left: 4px solid {{ request()->routeIs('shared-files.*') ? 'var(--color-primary-600)' : 'transparent' }};">
                 {{ __('Shared With Me') }}
-            </x-responsive-nav-link>
+            </a>
         </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
+        
+        <div style="padding: 1rem; border-top: 1px solid var(--color-gray-200);">
+            <div style="font-weight: 500; color: var(--color-gray-800);">{{ Auth::user()->name }}</div>
+            <div style="font-size: 0.875rem; color: var(--color-gray-500);">{{ Auth::user()->email }}</div>
+            
+            <div style="margin-top: 1rem;">
+                <a href="{{ route('profile.edit') }}" style="display: block; padding: 0.5rem 0; color: var(--color-gray-600);">Profile</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" style="display: block; padding: 0.5rem 0; color: var(--color-gray-600);">
+                        Log Out
+                    </a>
                 </form>
             </div>
         </div>
     </div>
 </nav>
+
+<style>
+    /* Add media queries that can't be inlined easily for the nav */
+    @media (min-width: 640px) {
+        .nav-links { display: flex !important; align-items: center; }
+        .nav-header > .container > div:last-of-type { display: none !important; }
+    }
+</style>
