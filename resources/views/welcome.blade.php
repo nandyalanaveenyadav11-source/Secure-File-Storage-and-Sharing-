@@ -45,7 +45,7 @@
         </h1>
         
         <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Protect your sensitive data with AES-256 encryption vaulted behind RSA-2048 keys. Designed for seamless, ultra-fast, and secure file storage.
+            Protect your sensitive data with AES-256 encryption vaulted behind RSA-2048 keys. Designed for seamless, ultra-fast, and secure file storage and sharing.
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -79,10 +79,10 @@
                 <!-- Feature 2 -->
                 <div>
                     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Fast Processing</h3>
-                    <p class="text-gray-600 leading-relaxed">Powerful on-the-fly encryption ensures your files are processed in milliseconds without delay.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Sharing</h3>
+                    <p class="text-gray-600 leading-relaxed">Instantly and securely share your encrypted files with other users on the platform with a single click.</p>
                 </div>
                 <!-- Feature 3 -->
                 <div>
